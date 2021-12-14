@@ -27,6 +27,7 @@
 
 .page {
   margin: 0; /*обнуляем отступы браузера по 8px*/
+  padding-top: 80px; /*высота отступа под липким меню*/
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -96,11 +97,15 @@ img {
 
 /* HEADER */
 .page-header {
-  /* position: fixed; */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0; /*верхние 4 условия для липкого меню*/
   display: flex;
   top: 0px;
   border-bottom: 1px solid var(--primery-backgraund-color);
   background-color: var(--second-title-color);
+  z-index: 2;
 } /* ? */
 
 .page-header ul {
@@ -163,6 +168,10 @@ li {
 
 .menu-link {
   font-style: normal;
+
+  /* transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
 }
 
 .menu .link:hover,
@@ -176,6 +185,29 @@ li {
 
 .menu .link.current {
   color: var(--accent-color);
+}
+
+.menu .item {
+  position: relative;
+}
+
+.menu .link.current::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  display: flex;
+  width: 100%;
+  height: 5px;
+  /* margin-top: 25px; */
+  border-radius: 2px;
+
+  padding: 1px;
+  color: var(--accent-color);
+  background-color: var(--accent-color);
+
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu {
@@ -195,6 +227,10 @@ li {
   padding-bottom: 32px;
 
   color: var(--title-text-color);
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu .item + .item {
@@ -225,6 +261,10 @@ li {
   display: flex;
   align-items: center;
   color: var(--primery-text-color);
+
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .connect .item + .item {
@@ -233,28 +273,26 @@ li {
 
 .connect-icon {
   margin-right: 10px;
-  fill: var(--primery-text-color);
+  fill: currentColor;
 }
 
 .icon-mail:hover,
 .icon-phone:hover {
-  /* fill: var(--accent-color); */
   fill: currentColor;
 }
 
 .i-mail {
   width: 16px;
   height: 12px;
-  fill: currentColor;
 }
 
 .i-phone {
   width: 10px;
   height: 16px;
-  fill: currentColor;
 }
 
-/* HERO SECTION */
+/* === HERO SECTION === */
+
 .hero {
   width: auto;
   height: auto;
@@ -275,8 +313,6 @@ li {
   line-height: 1.36;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  /* outline: 1px solid red; */
-  /* background-color: var(--second-backgraund-color); */
 }
 
 .overlay {
@@ -286,8 +322,6 @@ li {
   margin-left: auto;
   margin-right: auto;
 
-  /* background-size: contain; */
-
   background-image: linear-gradient(
       to right,
       rgba(47, 48, 58, 0.4),
@@ -295,6 +329,57 @@ li {
     ),
     url("../images/hero-img1.jpg");
   background-color: var(--second-backgraund-color);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /*100vw*/
+  height: 100%; /*100vh*/
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden; /*скрыть для других браузеров*/
+  pointer-events: none; /*снимает блокировку кликов на слое, можно кликать сквозь*/
+  z-index: 1;
+} /*"is-" утилитный класс*/
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(
+    -50%,
+    -50%
+  ); /*4 параметра размещающие элемент по центру относитеьно родителя*/
+
+  width: 528px;
+  min-height: 581px;
+  background-color: var(--second-title-color);
+}
+
+.frame-closer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  top: 8px;
+  right: 8px;
+  background-color: var(--third-backgraund-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.closer-svg {
+  position: absolute;
+  width: 11px;
+  height: 11px;
 }
 
 /* BUTTONS */
@@ -367,7 +452,7 @@ li {
   width: 70px;
 }
 
-/* WHAT WE DO SECTION */
+/* === WHAT WE DO SECTION === */
 
 .section-title.what-we-do {
   margin-bottom: 50px;
@@ -379,6 +464,7 @@ li {
 }
 
 .we-do li {
+  position: relative;
   margin-right: 30px;
   width: 370px;
 }
@@ -387,7 +473,34 @@ li {
   margin-right: 0;
 }
 
-/* TEAM SECTION */
+.we-do-hover {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.wedo-hover-title {
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--second-title-color);
+}
+
+/* === TEAM SECTION === */
 
 .section.team {
   background-color: var(--third-backgraund-color);
@@ -452,6 +565,10 @@ li {
   /* background-color: var(--accent-color); */
   border-radius: 50%;
   fill: #afb1b8;
+
+  transition-property: backgraund-color fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slink:hover,
@@ -466,7 +583,7 @@ li {
   align-items: center;
 }
 
-/* CLIENTS */
+/* === CLIENTS === */
 .clients-title.section-title {
   margin-bottom: 50px;
   text-align: center;
@@ -491,6 +608,10 @@ li {
   border-radius: 4px;
   /* outline: 1px solid #afb1b8; */
   color: #afb1b8;
+
+  transition-property: color border;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients-links:hover,
@@ -509,7 +630,7 @@ li {
   margin-left: 30px;
 }
 
-/* FOOTER */
+/* === FOOTER === */
 .foot {
   display: block;
   background-color: var(--second-backgraund-color);
@@ -566,6 +687,10 @@ li {
 .circle-frame.foot-frame {
   background-color: rgba(255, 255, 255, 0.1);
   fill: var(--second-title-color);
+
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .circle-frame.foot-frame:hover,
@@ -617,9 +742,13 @@ section.portfolio {
   line-height: 1.652;
   text-align: center;
   letter-spacing: 0.03em;
+
+  transition-property: color backgraund-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* GALLERY SECTION */
+/* === GALLERY SECTION === */
 
 ul.gallery-boxes {
   display: flex;
@@ -639,6 +768,7 @@ ul.gallery-boxes {
 } */
 
 .porto .pitch {
+  position: relative;
   padding: 20px 24px;
   border-right: 1px solid rgba(238, 238, 238, 1);
   border-bottom: 1px solid rgba(238, 238, 238, 1);
@@ -647,6 +777,9 @@ ul.gallery-boxes {
   border-bottom-right-radius: 4px;
   background-color: var(--second-title-color);
   /* outline: 1px solid tomato; */
+
+  overflow: hidden;
+  z-index: 1;
 }
 
 .porto:hover,
@@ -656,14 +789,60 @@ ul.gallery-boxes {
   outline: transparent;
 }
 
-/* .porto {
-  width: calc((100% - 90px) / 3);
-} */
+.porto {
+  position: relative;
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* width: calc((100% - 90px) / 3); */ 
+  overflow: hidden;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
 
 .imgg {
   /* display: block; */ /*убираем зазор внизу картинки - убрали в утилитах*/
+  position: relative;
   width: 370px;
+  overflow: hidden;
 }
+
+.porto:hover::after,
+.porto:focus::after {
+  
+
+   transform: translateY(-136.3%);
+  
+}
+
+.porto::after {
+  content: attr(data-descr);
+  /* content: ""; */
+  position: absolute;
+  display: flex;
+  width: 370px;
+  height: 294px;
+  background-color: rgba(33, 150, 243, 0.9);
+  padding: 64px 22px;
+  text-align: center;
+  align-items: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: var(--second-title-color);
+
+  transform: translateY(-36.3%);
+
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 100ms;
+  
+}
+
 
 .gallery-boxes h3 {
   font-weight: bold;
@@ -679,4 +858,11 @@ ul.gallery-boxes {
   line-height: 1.87;
   letter-spacing: 0.03em;
   color: var(--primery-text-color);
+}
+
+/* === ANIMATION === */
+
+@keyframes anime {
+  animation-duration: 250ms;
+  cubic-bezier(0.4, 0, 0.2, 1);
 }
