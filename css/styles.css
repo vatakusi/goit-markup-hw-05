@@ -205,9 +205,7 @@ li {
   color: var(--accent-color);
   background-color: var(--accent-color);
 
-  transition-property: box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu {
@@ -228,9 +226,7 @@ li {
 
   color: var(--title-text-color);
 
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu .item + .item {
@@ -262,9 +258,7 @@ li {
   align-items: center;
   color: var(--primery-text-color);
 
-  transition-property: box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .connect .item + .item {
@@ -566,9 +560,8 @@ li {
   border-radius: 50%;
   fill: #afb1b8;
 
-  transition-property: backgraund-color fill;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slink:hover,
@@ -624,6 +617,8 @@ li {
   width: 106px;
   height: 60px;
   fill: currentColor;
+
+  transition-property: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients-item + .clients-item {
@@ -688,9 +683,7 @@ li {
   background-color: rgba(255, 255, 255, 0.1);
   fill: var(--second-title-color);
 
-  transition-property: box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .circle-frame.foot-frame:hover,
@@ -743,9 +736,10 @@ section.portfolio {
   text-align: center;
   letter-spacing: 0.03em;
 
-  transition-property: color backgraund-color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
 }
 
 /* === GALLERY SECTION === */
@@ -770,6 +764,7 @@ ul.gallery-boxes {
 .porto .pitch {
   position: relative;
   padding: 20px 24px;
+  border-top: 1px solid rgba(238, 238, 238, 1);
   border-right: 1px solid rgba(238, 238, 238, 1);
   border-bottom: 1px solid rgba(238, 238, 238, 1);
   border-left: 1px solid rgba(238, 238, 238, 1);
@@ -791,10 +786,8 @@ ul.gallery-boxes {
 
 .porto {
   position: relative;
-  transition-property: box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  /* width: calc((100% - 90px) / 3); */ 
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* width: calc((100% - 90px) / 3); */
   overflow: hidden;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -802,17 +795,14 @@ ul.gallery-boxes {
 
 .imgg {
   /* display: block; */ /*убираем зазор внизу картинки - убрали в утилитах*/
-  position: relative;
+  /* position: relative; */
   width: 370px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .porto:hover::after,
 .porto:focus::after {
-  
-
-   transform: translateY(-136.3%);
-  
+  transform: translateY(-136.3%);
 }
 
 .porto::after {
@@ -836,13 +826,8 @@ ul.gallery-boxes {
 
   transform: translateY(-36.3%);
 
-  transition-property: transform;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 100ms;
-  
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 .gallery-boxes h3 {
   font-weight: bold;
@@ -861,8 +846,3 @@ ul.gallery-boxes {
 }
 
 /* === ANIMATION === */
-
-@keyframes anime {
-  animation-duration: 250ms;
-  cubic-bezier(0.4, 0, 0.2, 1);
-}
